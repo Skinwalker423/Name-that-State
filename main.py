@@ -53,7 +53,10 @@ while is_game_on and score < 50:
             is_game_on = False
             print(f"final score: {score}")
 
-states_not_in_list = states_csv[~states_csv.isin(answer_list)].dropna()
-print(states_not_in_list.to_csv("missed_states.csv"))
+# states_not_in_list = states_csv[~states_csv.isin(answer_list)].dropna()
+missed_states = [state for state in states_csv["state"] if state not in answer_list]
+print(missed_states)
+states_not_in_list = pandas.DataFrame(missed_states)
+states_not_in_list.to_csv("missed_states.csv")
 
 screen.exitonclick()
